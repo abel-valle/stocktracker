@@ -1,0 +1,4 @@
+investpy
+mysql-connector-python
+Flask
+mongoengine

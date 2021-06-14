@@ -1,0 +1,115 @@
+import mysql.connector
+from mysql.connector import Error
+
+
+def create_connection(host_name, user_name, user_password):
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            user=user_name,
+            passwd=user_password
+        )
+        print("Connection to MySQL DB successful")
+    except Error as e:
+        print(f"The error '{e}' occurred")
+
+    return connection
+
+
+def execute_query(connection, query):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query)
+        connection.commit()
+        print("Query executed successfully")
+    except Error as e:
+        print(f"The error '{e}' occurred")
+
+
+def execute_read_query(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as e:
+        print(f"The error '{e}' occurred")
+
+
+connection = create_connection("localhost", "root", "admin")
+
+# ======================================================================================================================
+# Insert records example -----------------------------------------------------------------------------------------------
+create_users = """
+INSERT INTO
+  `users` (`name`, `age`, `gender`, `nationality`)
+VALUES
+  ('James', 25, 'male', 'USA'),
+  ('Leila', 32, 'female', 'France'),
+  ('Brigitte', 35, 'female', 'England'),
+  ('Mike', 40, 'male', 'Denmark'),
+  ('Elizabeth', 21, 'female', 'Canada');
+"""
+execute_query(connection, create_users)
+
+# Other example --------------------------------------------------------------------------------------------------------
+sql = "INSERT INTO likes ( user_id, post_id ) VALUES ( %s, %s )"
+val = [(4, 5), (3, 4)]
+cursor = connection.cursor()
+cursor.executemany(sql, val)
+connection.commit()
+
+# Other example --------------------------------------------------------------------------------------------------------
+users = [
+    ("James", 25, "male", "USA"),
+    ("Leila", 32, "female", "France"),
+    ("Brigitte", 35, "female", "England"),
+    ("Mike", 40, "male", "Denmark"),
+    ("Elizabeth", 21, "female", "Canada"),
+]
+
+user_records = ", ".join(["%s"] * len(users))
+
+insert_query = (
+    f"INSERT INTO users (name, age, gender, nationality) VALUES {user_records}"
+)
+
+connection.autocommit = True
+cursor = connection.cursor()
+cursor.execute(insert_query, users)
+
+# ======================================================================================================================
+# Select records example -----------------------------------------------------------------------------------------------
+
+select_users = "SELECT * from users"
+users = execute_read_query(connection, select_users)
+
+for user in users:
+    print(user)
+
+# ======================================================================================================================
+# Update records example -----------------------------------------------------------------------------------------------
+
+update_post_description = """
+UPDATE
+  posts
+SET
+  description = "The weather has become pleasant now"
+WHERE
+  id = 2
+"""
+
+execute_query(connection,  update_post_description)
+
+# ======================================================================================================================
+# Delete records example -----------------------------------------------------------------------------------------------
+
+delete_comment = "DELETE FROM comments WHERE id = 2"
+execute_query(connection, delete_comment)
+
+# ======================================================================================================================
+# Query to get the rank of stocks
+
+select * from stocks order by status desc, profit desc;

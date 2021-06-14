@@ -1,0 +1,88 @@
+{% from "macros.html" import st_nav_bar with context %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>StockTracker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+{{ st_nav_bar() }}
+
+<div class="container p-3 my-3 border">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Selecciona para agregar a tu lista de seguimiento.</h3>
+            <p>Escribe algo en el cuadro para buscar en la tabla:</p>
+            <input class="form-control" id="myInput" type="text" placeholder="Buscar...">
+            <br>
+            <table class="table" id="myTable">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Símbolo</th>
+                    <th>Nombre</th>
+                    <th>Selección</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                            <label class="custom-control-label" for="customCheck1"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" checked>
+                            <label class="custom-control-label" for="customCheck2"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck3" checked>
+                            <label class="custom-control-label" for="customCheck2"></label>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+
+
+
+</script>
+
+</body>
+</html>
