@@ -1,4 +1,4 @@
 investpy
-mysql-connector-python
-Flask
+flask
 mongoengine
+flask-mongoengine
