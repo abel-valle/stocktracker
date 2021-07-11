@@ -12,6 +12,7 @@ def main():
 def user_view():
     return render_template('userview.html')
 
+
 @app.route("/selectstock")
 def select_stock():
     return render_template('selectstock.html')

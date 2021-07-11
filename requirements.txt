@@ -1,4 +1,6 @@
 investpy
 flask
+pymongo
 mongoengine
 flask-mongoengine
+ta-lib
