@@ -13,10 +13,13 @@ print(profile)
 # for symbol in symbol_list:
 #    print(symbol)
 
-df = investpy.get_stock_historical_data(stock='ICA',
-                                        country='mexico',
-                                        from_date=INI_DATE,
-                                        to_date=END_DATE)
-df.reset_index(inplace=True)
-for index, row in df.iterrows():
-    print('{}, {}'.format(row['Date'], row['Close']))
+# df = investpy.get_stock_historical_data(stock='ICA',
+#                                         country='mexico',
+#                                         from_date=INI_DATE,
+#                                         to_date=END_DATE)
+# df.reset_index(inplace=True)
+# for index, row in df.iterrows():
+#     print('{}, {}'.format(row['Date'], row['Close']))
+
+df = investpy.technical_indicators(name='NOKN', country='mexico', product_type='stock')
+print(df.head())
