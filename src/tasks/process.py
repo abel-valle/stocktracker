@@ -130,8 +130,19 @@ def create_stock_info():
     updated = stocks.update_many({}, {'$set': {
         'history': False,
         'date': None,
-        'price': np.nan,
-        'status': 'none'
+        'price': np.nan
+    }})
+    print('{} documents updated.'.format(updated.modified_count))
+
+
+def create_stock_tech_indicators():
+    stock_list = investpy.stocks.get_stocks_dict(COUNTRY)
+    stocks.insert_many(stock_list)
+    print('{} stock symbols saved.'.format(len(stock_list)))
+    updated = stocks.update_many({}, {'$set': {
+        'history': False,
+        'date': None,
+        'price': np.nan
     }})
     print('{} documents updated.'.format(updated.modified_count))
 
@@ -146,7 +157,8 @@ def create_stock_history():
     for stock_info in stock_list:
         symbol = stock_info['symbol']
         try:
-            df = investpy.get_stock_historical_data(stock=symbol, country=COUNTRY, from_date=INI_DATE, to_date=END_DATE)
+            df = investpy.get_stock_historical_data(stock=symbol, country=COUNTRY, from_date=INI_DATE,
+                                                    to_date=END_DATE, interval='Daily')
             df.reset_index(inplace=True)
             # Rename columns.
             df.columns = ['date', 'open', 'high', 'low', 'close', 'volume', 'currency']
@@ -232,6 +244,51 @@ def create_stock_history():
             if index == 3:
                 win_strategy = 'cci90'
 
+            # To get the technical indicators.
+            df_tech = investpy.technical_indicators(name=symbol, country='mexico', product_type='stock',
+                                                    interval='daily')
+            rsi_14 = None
+            stoch_9_6 = None
+            stochrsi_14 = None
+            macd_12_26 = None
+            adx_14 = None
+            williams_r = None
+            cci_14 = None
+            atr_14 = None
+            highs_lows_14 = None
+            ult_oscillator = None
+            roc = None
+            bull_bear_pow_13 = None
+
+            for i in df_tech.index:
+                technical_indicator = df_tech['technical_indicator'][i]
+                value = df_tech['value'][i]
+                signal = df_tech['signal'][i]
+                if technical_indicator == 'RSI(14)':
+                    rsi_14 = signal
+                if technical_indicator == 'STOCH(9,6)':
+                    stoch_9_6 = signal
+                if technical_indicator == 'STOCHRSI(14)':
+                    stochrsi_14 = signal
+                if technical_indicator == 'MACD(12,26)':
+                    macd_12_26 = signal
+                if technical_indicator == 'ADX(14)':
+                    adx_14 = signal
+                if technical_indicator == 'Williams %R':
+                    williams_r = signal
+                if technical_indicator == 'CCI(14)':
+                    cci_14 = signal
+                if technical_indicator == 'ATR(14)':
+                    atr_14 = signal
+                if technical_indicator == 'Highs/Lows(14)':
+                    highs_lows_14 = signal
+                if technical_indicator == 'Ultimate Oscillator':
+                    ult_oscillator = signal
+                if technical_indicator == 'ROC':
+                    roc = signal
+                if technical_indicator == 'Bull/Bear Power(13)':
+                    bull_bear_pow_13 = signal
+
             stocks.update_one({'symbol': symbol}, {'$set': {
                 'history': True,
                 'date': date,
@@ -244,13 +301,24 @@ def create_stock_history():
                 'cci_profit': cci_profit,
                 'cci90_trade': cci90_trade,
                 'cci90_profit': cci90_profit,
-                'win_strategy': win_strategy
+                'win_strategy': win_strategy,
+                't_rsi_14': rsi_14,
+                't_stoch_9_6': stoch_9_6,
+                't_stochrsi_14': stochrsi_14,
+                't_macd_12_26': macd_12_26,
+                't_adx_14': adx_14,
+                't_williams_r': williams_r,
+                't_cci_14': cci_14,
+                't_atr_14': atr_14,
+                't_highs_lows_14': highs_lows_14,
+                't_ult_oscillator': ult_oscillator,
+                't_roc': roc,
+                't_bull_bear_pow_13': bull_bear_pow_13
             }})
             print('{} Symbol {} processed and saved.'.format(counter, symbol))
         except Exception as e:
             print("{} Symbol {} history not found.".format(counter, symbol))
             print(type(e))
-            print(e.args)
             print(e.args)
         counter += 1
 
