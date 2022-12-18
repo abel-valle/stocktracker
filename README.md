@@ -17,6 +17,10 @@ To install Ta-Lib easily, you can follow these steps:
 
 ##  Setup
 
+###  Install MongoDB
+
+[MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
 ###  Execution
 ```
 source venv/bin/activate
