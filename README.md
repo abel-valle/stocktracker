@@ -15,6 +15,11 @@ To install Ta-Lib easily, you can follow these steps:
 `conda install -c conda-forge ta-lib`
 - Press the "Enter" key
 
+Install dependencies:
+
+https://github.com/mrjbq7/ta-lib
+Note: Check the Windows section.
+
 ##  Setup
 
 ###  Install MongoDB
