@@ -12,26 +12,27 @@ To install Ta-Lib easily, you can follow these steps:
 
 - Open the Anaconda prompt
 - Write the code:
-
-    conda install -c conda-forge ta-lib
+`conda install -c conda-forge ta-lib`
+- Press the "Enter" key
 
 ##  Setup
 
 ###  Execution
-
-    source venv/bin/activate
-    # deactivate
-    python src/tasks/process.py
-
+```
+source venv/bin/activate
+# deactivate
+python src/tasks/process.py
+```
 ###  Database
+```
+mongod --config /usr/local/etc/mongod.conf
+ps aux | grep -v grep | grep mongod
+ps -fea | grep mongo
 
-    mongod --config /usr/local/etc/mongod.conf
-    ps aux | grep -v grep | grep mongod
-    ps -fea | grep mongo
+vi /usr/local/etc/mongod.conf
+
+# To kill the mongod process.
+kill -2 7723
     
-    vi /usr/local/etc/mongod.conf
-    
-    # To kill the mongod process.
-    kill -2 7723
-    
-    launchctl list | grep mongo
+launchctl list | grep mongo
+```
