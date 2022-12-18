@@ -21,6 +21,12 @@ To install Ta-Lib easily, you can follow these steps:
 
 [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
+If any error like:
+
+
+Install it from:
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
 ###  Create and use Python evironment
 
 ```
