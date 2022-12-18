@@ -18,6 +18,7 @@ To install Ta-Lib easily, you can follow these steps:
 Install dependencies:
 
 https://github.com/mrjbq7/ta-lib
+
 Note: Check the Windows section.
 
 ##  Setup
