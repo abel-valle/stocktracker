@@ -21,10 +21,27 @@ To install Ta-Lib easily, you can follow these steps:
 
 [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
+###  Create and use Python evironment
+
+```
+# Create environment
+python -m venv venv
+```
+
 ###  Execution
 ```
+# Activate the environment
 source venv/bin/activate
-# deactivate
+
+# Activate Windows
+venv\Scripts\activate
+# Deactivate Windows
+venv\Scripts\deactivate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Execute process
 python src/tasks/process.py
 ```
 ###  Database
