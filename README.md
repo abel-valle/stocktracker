@@ -22,6 +22,8 @@ To install Ta-Lib easily, you can follow these steps:
 [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
 If any error like:
+`error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual
+C++ Build Tools":`
 
 
 Install it from:
