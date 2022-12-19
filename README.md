@@ -28,11 +28,12 @@ Note: Check the Windows section.
 [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
 If any error like:
+
 `error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual
 C++ Build Tools":`
 
-
 Install it from:
+
 https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
 ###  Create and use Python evironment
