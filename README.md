@@ -2,13 +2,29 @@
 StockTracker repository.
 
 ## Requirements
-TA-Lib must be installed as system library.
+
+### Install TA-LIB
+TA-Lib must be installed as system library first in order to install pip package.
 
 - [TA-Lib Library installation 1](https://blog.quantinsti.com/install-ta-lib-python/)
 - [TA-Lib Library installation 2](https://rohan09.medium.com/how-to-install-ta-lib-in-python-86e4edb80934)
-- [TA-Lib Python wrapper reference](https://mrjbq7.github.io/ta-lib/install.html)
+- [TA-Lib Python wrapper reference (Windows)](https://mrjbq7.github.io/ta-lib/install.html)
 
-To install Ta-Lib easily, you can follow these steps:
+#### Linux
+
+Download TA-LIB from: http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+
+```
+tar –xvzf ta-lib-0.4.0-src.tar.gz
+cd ~/ta-lib
+./configure --prefix=/usr
+make
+sudo make install
+```
+
+#### Windows
+
+To install Ta-Lib easily in Windows, you can follow these steps:
 
 - Open the Anaconda prompt
 - Write the code:
@@ -21,11 +37,11 @@ https://github.com/mrjbq7/ta-lib
 
 Note: Check the Windows section.
 
-##  Setup
-
 ###  Install MongoDB
 
 [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
+#### Windows
 
 If any error like:
 
